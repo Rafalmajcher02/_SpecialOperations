@@ -59,11 +59,7 @@ public class Shooting : MonoBehaviour
     {
         //Statistics
         playerStatistics.PlayerAmmo -= 1f;
-        shootsFired += 1f;
-
-        //Log
-        Debug.Log("Shoot fired! " + playerStatistics.PlayerAmmo + " ammo left!");
-        
+        shootsFired += 1f;   
 
         //Creates and starts the bullet
         GameObject tempBullet = Instantiate(bullet, firePoint.position, firePoint.rotation);

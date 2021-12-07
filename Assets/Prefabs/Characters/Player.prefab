@@ -204,7 +204,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1775752161}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.696, y: 0.042, z: -1.1358074}
+  m_LocalPosition: {x: 0.714, y: 0.042, z: -1.1358074}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8671270267455653921}
@@ -607,7 +607,7 @@ MonoBehaviour:
   canShoot: 0
   safetySwitch: 1
   shootsFired: 0
-  bulletSpeed: 40000
+  bulletSpeed: 30
   playerStatistics: {fileID: 7103001739035001169}
   ausioSource: {fileID: 832779027702915163}
   bullet: {fileID: 1049930446241166962, guid: 5701aa702ae54364eba6765e6628d202, type: 3}
