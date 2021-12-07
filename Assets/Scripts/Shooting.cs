@@ -7,7 +7,7 @@ public class Shooting : MonoBehaviour
     //bools
     private bool saidMes;
     public bool canShoot;
-    public bool safetySwitch;
+    public bool safetySwitch = true;
     //floats
     public float shootsFired; //Will be send to other scrip
     public float bulletSpeed = 40000f; //Will be overwritte through inspector
@@ -26,10 +26,6 @@ public class Shooting : MonoBehaviour
 
         //Statistics
         shootsFired = playerStatistics.PlayerShootsDone; 
-
-        //bools      
-        safetySwitch = false;
-
     }
     private void Update()
     {
@@ -42,13 +38,16 @@ public class Shooting : MonoBehaviour
             safetySwitch = !safetySwitch;            
         }
         //Shooting and checking for bools
-        if (Input.GetButtonDown("Fire1") && safetySwitch && playerStatistics.PlayerAmmo > 0)
+        if (!safetySwitch)
         {
-            Shoot();
-        }
-        if (Input.GetButtonDown("Fire1") && safetySwitch && 0 >= playerStatistics.PlayerAmmo)
-        {
-            Debug.Log("No ammo");
+            if (Input.GetButtonDown("Fire1") && playerStatistics.PlayerAmmo > 0)
+            {
+                Shoot();
+            }
+            if (Input.GetButtonDown("Fire1") && 0 >= playerStatistics.PlayerAmmo)
+            {
+                Debug.Log("No ammo");
+            }
         }
     }
     /// <summary>
