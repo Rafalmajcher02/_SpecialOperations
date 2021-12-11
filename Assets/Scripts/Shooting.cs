@@ -41,13 +41,24 @@ public class Shooting : MonoBehaviour
             SafetySwitch();
         }
         //Shooting and checking for bools
-        if (!safetySwitchBool)
+        if (safetyMode == 1)
         {
             if (Input.GetButtonDown("Fire1") && playerStatistics.PlayerAmmo > 0)
             {
                 Shoot();
             }
             if (Input.GetButtonDown("Fire1") && 0 >= playerStatistics.PlayerAmmo)
+            {
+                Debug.Log("No ammo");
+            }
+        }
+        if (safetyMode == 2)
+        {
+            if (Input.GetButton("Fire1") && playerStatistics.PlayerAmmo > 0)
+            {
+                Shoot();
+            }
+            if (Input.GetButton("Fire1") && 0 >= playerStatistics.PlayerAmmo)
             {
                 Debug.Log("No ammo");
             }
