@@ -89,6 +89,9 @@ public class Shooting : MonoBehaviour
         ausioSource.PlayOneShot(shootSoundEffects[randomiser], volRandomiser);
         ausioSource.pitch = 1f;
     }
+    /// <summary>
+    /// Changes safety mode for the rifle, current checks the digit and changes it to next
+    /// </summary>
     private void SafetySwitch()
     {
         //Switches from Safety to Semi
@@ -110,6 +113,5 @@ public class Shooting : MonoBehaviour
             safetyMode = 0;
             Debug.Log(safetyMode);
         }
-
     }
 }
