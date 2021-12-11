@@ -7,16 +7,18 @@ public class Shooting : MonoBehaviour
     //bools
     private bool saidMes;
     public bool canShoot;
-    public bool safetySwitch = true;
+    public bool safetySwitchBool = true;
     //floats
     public float shootsFired; //Will be send to other scrip
-    public float bulletSpeed = 40000f; //Will be overwritte through inspector
+    public float bulletSpeed = 40000f; //Will be overwriten through inspector
     //other
     public PlayerStatistics playerStatistics;
     public AudioSource ausioSource;
     public GameObject bullet;
     public Transform firePoint;
-    public AudioClip[] shootSoundEffects; 
+    public AudioClip[] shootSoundEffects;
+    //safety swtich settings
+    public int safetyMode = 0;
 
     private void Start()
     {         
@@ -33,12 +35,13 @@ public class Shooting : MonoBehaviour
         //Positive
 
         //Toggle Safety Switch
-        if (Input.GetButtonDown("FireAllowed"))
+        if (Input.GetButtonDown("SafetySwitch"))
         {
-            safetySwitch = !safetySwitch;            
+            safetySwitchBool = !safetySwitchBool;
+            SafetySwitch();
         }
         //Shooting and checking for bools
-        if (!safetySwitch)
+        if (!safetySwitchBool)
         {
             if (Input.GetButtonDown("Fire1") && playerStatistics.PlayerAmmo > 0)
             {
@@ -74,5 +77,28 @@ public class Shooting : MonoBehaviour
         //Play sound
         ausioSource.PlayOneShot(shootSoundEffects[randomiser], volRandomiser);
         ausioSource.pitch = 1f;
+    }
+    private void SafetySwitch()
+    {
+        //Switches from Safety to Semi
+        if (safetyMode == 0)
+        {
+            safetyMode = 1;
+            Debug.Log(safetyMode);
+        }
+        //Switches from Semi to Auto
+        else if (safetyMode == 1)
+        {
+            safetyMode = 2;
+            Debug.Log(safetyMode);
+                     
+        }
+        //Switches from Auto to Safety
+        else if(safetyMode == 2)
+        {
+            safetyMode = 0;
+            Debug.Log(safetyMode);
+        }
+
     }
 }
