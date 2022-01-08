@@ -17,6 +17,7 @@ public class Shooting : MonoBehaviour
     public GameObject bullet;
     public Transform firePoint;
     public AudioClip[] shootSoundEffects;
+    public string shootingMode = "Safety";
     //safety swtich settings
     public int safetyMode = 0;
     public bool shootDeleyBool = true;
@@ -28,7 +29,8 @@ public class Shooting : MonoBehaviour
         ausioSource = GetComponent<AudioSource>();
 
         //Statistics
-        shootsFired = playerStatistics.PlayerShootsDone; 
+        shootsFired = playerStatistics.PlayerShootsDone;
+        shootingMode = playerStatistics.ShootingMode;
     }
     private void Update()
     {
@@ -85,11 +87,6 @@ public class Shooting : MonoBehaviour
         //Statistics
         playerStatistics.PlayerAmmo -= 1f;
         shootsFired += 1f;
-
-        if (shootDeleyBool)
-        {
-
-        }
         //Creates and starts the bullet
         GameObject tempBullet = Instantiate(bullet, firePoint.position, firePoint.rotation);
         tempBullet.GetComponent<Rigidbody2D>().AddForce(firePoint.transform.right * bulletSpeed * Time.deltaTime);
@@ -113,12 +110,14 @@ public class Shooting : MonoBehaviour
         //Switches from Safety to Semi
         if (safetyMode == 0)
         {
+            playerStatistics.ShootingMode = "Semi Audo";
             safetyMode = 1;
             Debug.Log(safetyMode);
         }
         //Switches from Semi to Auto
         else if (safetyMode == 1)
         {
+            playerStatistics.ShootingMode = "Full Audo";
             safetyMode = 2;
             Debug.Log(safetyMode);
                      
@@ -126,12 +125,13 @@ public class Shooting : MonoBehaviour
         //Switches from Auto to Safety
         else if(safetyMode == 2)
         {
+            playerStatistics.ShootingMode = "Safety";
             safetyMode = 0;
             Debug.Log(safetyMode);
         }
     }
 
-    private IEnumerator ShootAfterDeley() //Allows for shooting deley on auto
+    private IEnumerator ShootAfterDeley() //Allows for deley between shots in full auto mode
     {
         yield return new WaitForSeconds(0.3f);
         shootDeleyBool = true;
