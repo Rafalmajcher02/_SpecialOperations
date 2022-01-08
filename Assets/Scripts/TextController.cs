@@ -14,6 +14,7 @@ public class TextController : MonoBehaviour
     public TextMeshProUGUI VIP;
     public TextMeshProUGUI Enemy;
     public TextMeshProUGUI Star;
+    public TextMeshProUGUI shootMode;
     //Other
     private PlayerStatistics PS;
     //Statistics
@@ -22,6 +23,7 @@ public class TextController : MonoBehaviour
     public GameObject[] vips;
     public GameObject[] ene;
     public GameObject[] star;
+    public string shoot;
     //DoneStatistics
     private float civsD;
     private float vipsD;
@@ -38,11 +40,13 @@ public class TextController : MonoBehaviour
         vipsD = PS.VIPsCollected;
         eneD = PS.EnemyKills;
         starD = PS.StarsCollected;
+        shoot = PS.ShootingMode;
+        //Assign variable to game object
         civs = GameObject.FindGameObjectsWithTag("Civilian");
         vips = GameObject.FindGameObjectsWithTag("VIP");
         ene = GameObject.FindGameObjectsWithTag("Enemy");
         star = GameObject.FindGameObjectsWithTag("Star");
-
+        
     }
 
     
@@ -63,5 +67,8 @@ public class TextController : MonoBehaviour
         //Stars
         Star.text = ("Stars: " + starD + "/" + star.Length);
         starD = PS.StarsCollected;
+        //Shooting Mode
+        shootMode.text = ("Shooting Mode: " + shoot);
+        shoot = PS.ShootingMode;
     }
 }

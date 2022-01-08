@@ -15,4 +15,5 @@ public class PlayerStatistics : MonoBehaviour
     public float VIPsCollected = 0f;
     public float EnemyKills = 0f;
     public float StarsCollected = 0f;
+    public string ShootingMode = "Safety";
 }

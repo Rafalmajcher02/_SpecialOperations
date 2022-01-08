@@ -62,8 +62,7 @@ public class AIController : MonoBehaviour
     }
 
     private void AIShootAtPlayer()
-    {
-        Debug.Log("Shoot fired! (AI)");
+    {        
         GameObject tempBullet = Instantiate(Bullet, firePoint.position, firePoint.rotation);
         tempBullet.GetComponent<Rigidbody2D>().AddForce(firePoint.transform.right * bulletSpeed * Time.deltaTime);
         Destroy(tempBullet, 20f);
