@@ -19,7 +19,8 @@ public class Shooting : MonoBehaviour
     public AudioClip[] shootSoundEffects;
     //safety swtich settings
     public int safetyMode = 0;
-
+    public bool shootDeleyBool = true;
+    public bool buttonDown = false;
     private void Start()
     {         
         //Getting components
@@ -46,15 +47,24 @@ public class Shooting : MonoBehaviour
             if (Input.GetButtonDown("Fire1") && playerStatistics.PlayerAmmo > 0)
             {
                 Shoot();
+                buttonDown = true;
             }
             if (Input.GetButtonDown("Fire1") && 0 >= playerStatistics.PlayerAmmo)
             {
                 Debug.Log("No ammo");
             }
+            /*
+            if (Input.GetButtonUp("Fire1") && playerStatistics.PlayerAmmo > 0)
+            {
+
+                buttonDown = false;
+            }
+            */
         }
+        
         if (safetyMode == 2)
         {
-            if (Input.GetButton("Fire1") && playerStatistics.PlayerAmmo > 0)
+            if (Input.GetButton("Fire1") && playerStatistics.PlayerAmmo > 0 && shootDeleyBool)
             {
                 Shoot();
             }
@@ -63,6 +73,7 @@ public class Shooting : MonoBehaviour
                 Debug.Log("No ammo");
             }
         }
+        
     }
     /// <summary>
     /// This method allows player to shoot
@@ -73,15 +84,20 @@ public class Shooting : MonoBehaviour
     {
         //Statistics
         playerStatistics.PlayerAmmo -= 1f;
-        shootsFired += 1f;   
+        shootsFired += 1f;
 
+        if (shootDeleyBool)
+        {
+
+        }
         //Creates and starts the bullet
         GameObject tempBullet = Instantiate(bullet, firePoint.position, firePoint.rotation);
         tempBullet.GetComponent<Rigidbody2D>().AddForce(firePoint.transform.right * bulletSpeed * Time.deltaTime);
         //Destroys bullet after 40s
         Destroy(tempBullet, 40f);
-
-
+        shootDeleyBool = false;
+        Debug.Log("on");
+        StartCoroutine(ShootAfterDeley());
         //Randomises sounds settings
         int randomiser = UnityEngine.Random.Range(0, shootSoundEffects.Length); //Random sounds clip from array
         float volRandomiser = UnityEngine.Random.Range(0.90f, 1.80f); //Random volume
@@ -113,5 +129,11 @@ public class Shooting : MonoBehaviour
             safetyMode = 0;
             Debug.Log(safetyMode);
         }
+    }
+
+    private IEnumerator ShootAfterDeley() //Allows for shooting deley on auto
+    {
+        yield return new WaitForSeconds(0.3f);
+        shootDeleyBool = true;
     }
 }
