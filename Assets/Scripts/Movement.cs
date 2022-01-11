@@ -39,11 +39,9 @@ public class Movement : MonoBehaviour
         audioS = GetComponent<AudioSource>();
         MovementSpeed = PS.PlayerSpeed;
         JumpForce = PS.PlayerJumpForce;
-        LaderSpeed = PS.PlayerLadderSpeed;
         //bools
         CanJump = false;
         isLadder = false;
-        noLadder = true;
         isElevator = false;
         isPause = false;
     }
@@ -52,10 +50,6 @@ public class Movement : MonoBehaviour
         if (noLadder)
         {
             movement();
-        }
-        if (isLadder)
-        {
-            ladderMovement();
         }
         if (isElevator)
         {
@@ -89,11 +83,6 @@ public class Movement : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == ladderName)
-        {
-            isLadder = true;
-            noLadder = false;
-        }
         if (collision.gameObject.tag == Elevator)
         {
             isElevator = true;
@@ -101,11 +90,6 @@ public class Movement : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ladder"))
-        {
-            isLadder = false;
-            noLadder = true;
-        }
         if (collision.gameObject.tag == Elevator)
         {
             isElevator = false;
@@ -136,27 +120,6 @@ public class Movement : MonoBehaviour
         if (collision.gameObject.tag == triggerName)
         {
             CanJump = true;
-        }
-    }
-
-    private void ladderMovement()
-    {
-        GetComponent<Rigidbody2D>().gravityScale = 0; //changes gravity for ladder
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.position += transform.up * LaderSpeed;         //moves up ladder
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.position += transform.up * -LaderSpeed; //moves down ladder
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            RB2.AddForce(transform.right * MovementSpeed); //right movement
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            RB2.AddForce(transform.right * -MovementSpeed); //left movement
         }
     }
 
