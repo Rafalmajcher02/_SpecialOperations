@@ -37,16 +37,12 @@ public class Movement : MonoBehaviour
         JumpForce = PS.PlayerJumpForce;
         //bools
         CanJump = false;
-        isLadder = false;
         isElevator = false;
         isPause = false;
     }
     private void Update()
     {
-        if (noLadder)
-        {
-            movement();
-        }
+
         if (isElevator)
         {
             ElevatorMovement();
