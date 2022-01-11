@@ -47,7 +47,7 @@ public class Movement : MonoBehaviour
         isElevator = false;
         isPause = false;
     }
-    private void FixedUpdate()
+    private void Update()
     {
         if (noLadder)
         {
