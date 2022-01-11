@@ -16,7 +16,6 @@ public class Movement : MonoBehaviour
     public bool isElevator;
     public bool isPlayingSound;
     public bool isPause;
-
     //strings
     public string triggerName = "Ground";
     public string Elevator = "Elevator";
@@ -72,7 +71,8 @@ public class Movement : MonoBehaviour
             Time.timeScale = 1.0f;
         }
     }
-
+    
+    //Elevator
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == Elevator)
@@ -106,7 +106,7 @@ public class Movement : MonoBehaviour
         }
 
     }
-
+    //Jumping
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == triggerName)
@@ -118,17 +118,20 @@ public class Movement : MonoBehaviour
 
     private void ElevatorMovement()
     {
-        Vector3 temp = new Vector3(0, 5f, 0);
+        Vector3 jumpUpVectorY = new Vector3(0, 5f, 0);
 
         if (Input.GetKeyDown(KeyCode.E) && RB2.position.y < 14f) //teleports up on elevator
         {
-            transform.position += temp;
+            transform.position += jumpUpVectorY;
         }
         if (Input.GetKeyDown(KeyCode.Q) && RB2.position.y > -0f) //teleports down on elevator
         {
-            transform.position -= temp;
+            transform.position -= jumpUpVectorY;
         }
     }
+
+    //Audio
+
     private void StepSound()//Activated by animation event, causing sound on steps when walking
     {
         audioS.pitch = UnityEngine.Random.Range(0.75f, 1.15f);//generates random pitch
