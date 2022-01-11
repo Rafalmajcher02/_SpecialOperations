@@ -11,10 +11,7 @@ public class Movement : MonoBehaviour
     //floats
     private float MovementSpeed;
     private float JumpForce;
-    private float LaderSpeed;
     //bools
-    public bool isLadder;
-    public bool noLadder;
     public bool CanJump;
     public bool isElevator;
     public bool isPlayingSound;
@@ -22,7 +19,6 @@ public class Movement : MonoBehaviour
 
     //strings
     public string triggerName = "Ground";
-    public string ladderName = "Ladder";
     public string Elevator = "Elevator";
     //audio
     private AudioSource audioS;
