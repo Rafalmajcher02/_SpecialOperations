@@ -16,6 +16,7 @@ public class Movement : MonoBehaviour
     public bool isElevator;
     public bool isPlayingSound;
     public bool isPause;
+    public bool insideElevator;
     //strings
     public string triggerName = "Ground";
     public string Elevator = "Elevator";
@@ -38,6 +39,7 @@ public class Movement : MonoBehaviour
         CanJump = false;
         isElevator = false;
         isPause = false;
+        insideElevator = false;
     }
     private void Update()
     {
@@ -92,6 +94,17 @@ public class Movement : MonoBehaviour
         }
     }
 
+
+    //Jumping
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == triggerName)
+        {
+            CanJump = true;
+        }
+    }
+
+    //Movement Methods
     private void movement()
     {
         GetComponent<Rigidbody2D>().gravityScale = 1; //resets gravity
@@ -110,28 +123,22 @@ public class Movement : MonoBehaviour
         }
 
     }
-    //Jumping
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == triggerName)
-        {
-            CanJump = true;
-        }
-    }
-
 
     private void ElevatorMovement()
     {
         Vector3 jumpUpVectorY = new Vector3(0, 5f, 0);
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (Input.GetKeyDown(KeyCode.W) && RB2.position.y < 14f) //teleports up on elevator
+            {
+                transform.position += jumpUpVectorY;
+            }
+            if (Input.GetKeyDown(KeyCode.S) && RB2.position.y > -0f) //teleports down on elevator
+            {
+                transform.position -= jumpUpVectorY;
+            }
+        }
 
-        if (Input.GetKeyDown(KeyCode.E) && RB2.position.y < 14f) //teleports up on elevator
-        {
-            transform.position += jumpUpVectorY;
-        }
-        if (Input.GetKeyDown(KeyCode.Q) && RB2.position.y > -0f) //teleports down on elevator
-        {
-            transform.position -= jumpUpVectorY;
-        }
     }
 
     //Audio
