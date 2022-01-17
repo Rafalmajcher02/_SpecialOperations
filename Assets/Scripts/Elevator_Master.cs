@@ -6,6 +6,8 @@ public class Elevator_Master : MonoBehaviour
 {
     public GameObject elevatorShaft;
     public GameObject[] elevatorFloors;
+    public ElevatorPlayerDetector EPD;
+
     public int floorCount;
     // Start is called before the first frame update
     void Start()
