@@ -41,10 +41,14 @@ public class Movement : MonoBehaviour
     }
     private void Update()
     {
-
         if (isElevator)
         {
             ElevatorMovement();
+            movement();
+        }
+        if (!isElevator)
+        {
+            movement();
         }
         if (RB2.velocity.x != 0 && !isPlayingSound)
         {
@@ -98,7 +102,7 @@ public class Movement : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.D))
         {
-            RB2.AddForce(transform.right * MovementSpeed); //moves right              
+            RB2.AddForce(transform.right * MovementSpeed); //moves right                                            
         }
         if (Input.GetKey(KeyCode.A))
         {
