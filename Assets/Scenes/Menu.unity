@@ -3771,9 +3771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BgMusic:
-  - {fileID: 8300000, guid: 47781631c1fb75e47be718917c326639, type: 3}
-  - {fileID: 8300000, guid: 9452235cc46026f4fa9e26ff6034ce12, type: 3}
-  - {fileID: 8300000, guid: 5165230cb6a79a14b8e0e3201a5023a7, type: 3}
+  - {fileID: 8300000, guid: 20feafe483a364a4cb35f1f0e27f874b, type: 3}
   trackSelector: 0
   trackHistory: 0
 --- !u!82 &1917464838
