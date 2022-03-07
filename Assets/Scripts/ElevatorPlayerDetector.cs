@@ -16,6 +16,10 @@ public class ElevatorPlayerDetector : MonoBehaviour
     {
         if (collision.gameObject.tag == Player)
         {
+            if (Input.GetButton("Interact Button"))
+            {
+                Debug.Log("Intered Elevator");
+            }
             index = self.name;
             Debug.Log(index);
         }
