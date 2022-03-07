@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class Movement : C_Rigidbody
 {
     //extractions
-    private Rigidbody2D RB2;
     public PlayerStatistics PS;
     //floats
     private float MovementSpeed;
@@ -31,7 +30,6 @@ public class Movement : MonoBehaviour
     void Start()
     {
         //extractions
-        RB2 = GetComponent<Rigidbody2D>();
         audioS = GetComponent<AudioSource>();
         MovementSpeed = PS.PlayerSpeed;
         JumpForce = PS.PlayerJumpForce;
@@ -52,12 +50,12 @@ public class Movement : MonoBehaviour
         {
             movement();
         }
-        if (RB2.velocity.x != 0 && !isPlayingSound)
+        if (rigid2D.velocity.x != 0 && !isPlayingSound)
         {
             StepSound();
             isPlayingSound = false;
         }
-        if (RB2.velocity.x == 0)
+        if (rigid2D.velocity.x == 0)
         {
             audioS.Stop();
         }
@@ -110,16 +108,16 @@ public class Movement : MonoBehaviour
         GetComponent<Rigidbody2D>().gravityScale = 1; //resets gravity
         if (Input.GetButton("Jump") && CanJump) //if jump conditions
         {
-            RB2.AddForce(transform.up * JumpForce, ForceMode2D.Impulse); //jump by adding force up on impulse
+            rigid2D.AddForce(transform.up * JumpForce, ForceMode2D.Impulse); //jump by adding force up on impulse
             CanJump = false; //resets jump
         }
         if (Input.GetKey(KeyCode.D))
         {
-            RB2.AddForce(transform.right * MovementSpeed); //moves right                                            
+            rigid2D.AddForce(transform.right * MovementSpeed); //moves right                                            
         }
         if (Input.GetKey(KeyCode.A))
         {
-            RB2.AddForce(transform.right * -MovementSpeed); //movs left             
+            rigid2D.AddForce(transform.right * -MovementSpeed); //movs left             
         }
 
     }
@@ -129,11 +127,11 @@ public class Movement : MonoBehaviour
         Vector3 jumpUpVectorY = new Vector3(0, 5f, 0);
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (Input.GetKeyDown(KeyCode.W) && RB2.position.y < 14f) //teleports up on elevator
+            if (Input.GetKeyDown(KeyCode.W) && rigid2D.position.y < 14f) //teleports up on elevator
             {
                 transform.position += jumpUpVectorY;
             }
-            if (Input.GetKeyDown(KeyCode.S) && RB2.position.y > -0f) //teleports down on elevator
+            if (Input.GetKeyDown(KeyCode.S) && rigid2D.position.y > -0f) //teleports down on elevator
             {
                 transform.position -= jumpUpVectorY;
             }
