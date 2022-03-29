@@ -3,26 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class Movement : C_Rigidbody
 {
     //extractions
-    private Rigidbody2D RB2;
     public PlayerStatistics PS;
     //floats
     private float MovementSpeed;
     private float JumpForce;
-    private float LaderSpeed;
     //bools
-    public bool isLadder;
-    public bool noLadder;
     public bool CanJump;
     public bool isElevator;
     public bool isPlayingSound;
     public bool isPause;
-
+    public bool insideElevator;
     //strings
     public string triggerName = "Ground";
-    public string ladderName = "Ladder";
     public string Elevator = "Elevator";
     //audio
     private AudioSource audioS;
@@ -35,38 +30,32 @@ public class Movement : MonoBehaviour
     void Start()
     {
         //extractions
-        RB2 = GetComponent<Rigidbody2D>();
         audioS = GetComponent<AudioSource>();
         MovementSpeed = PS.PlayerSpeed;
         JumpForce = PS.PlayerJumpForce;
-        LaderSpeed = PS.PlayerLadderSpeed;
         //bools
         CanJump = false;
-        isLadder = false;
-        noLadder = true;
         isElevator = false;
         isPause = false;
+        insideElevator = false;
     }
-    private void FixedUpdate()
+    private void Update()
     {
-        if (noLadder)
-        {
-            movement();
-        }
-        if (isLadder)
-        {
-            ladderMovement();
-        }
         if (isElevator)
         {
             ElevatorMovement();
+            movement();
         }
-        if (RB2.velocity.x != 0 && !isPlayingSound)
+        if (!isElevator)
+        {
+            movement();
+        }
+        if (rigid2D.velocity.x != 0 && !isPlayingSound)
         {
             StepSound();
             isPlayingSound = false;
         }
-        if (RB2.velocity.x == 0)
+        if (rigid2D.velocity.x == 0)
         {
             audioS.Stop();
         }
@@ -86,14 +75,10 @@ public class Movement : MonoBehaviour
             Time.timeScale = 1.0f;
         }
     }
-
+    
+    //Elevator
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == ladderName)
-        {
-            isLadder = true;
-            noLadder = false;
-        }
         if (collision.gameObject.tag == Elevator)
         {
             isElevator = true;
@@ -101,36 +86,14 @@ public class Movement : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ladder"))
-        {
-            isLadder = false;
-            noLadder = true;
-        }
         if (collision.gameObject.tag == Elevator)
         {
             isElevator = false;
         }
     }
 
-    private void movement()
-    {
-        GetComponent<Rigidbody2D>().gravityScale = 1; //resets gravity
-        if (Input.GetButton("Jump") && CanJump) //if jump conditions
-        {
-            RB2.AddForce(transform.up * JumpForce, ForceMode2D.Impulse); //jump by adding force up on impulse
-            CanJump = false; //resets jump
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            RB2.AddForce(transform.right * MovementSpeed); //moves right              
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            RB2.AddForce(transform.right * -MovementSpeed); //movs left             
-        }
 
-    }
-
+    //Jumping
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == triggerName)
@@ -139,41 +102,45 @@ public class Movement : MonoBehaviour
         }
     }
 
-    private void ladderMovement()
+    //Movement Methods
+    private void movement()
     {
-        GetComponent<Rigidbody2D>().gravityScale = 0; //changes gravity for ladder
-        if (Input.GetKey(KeyCode.W))
+        GetComponent<Rigidbody2D>().gravityScale = 1; //resets gravity
+        if (Input.GetButton("Jump") && CanJump) //if jump conditions
         {
-            transform.position += transform.up * LaderSpeed;         //moves up ladder
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.position += transform.up * -LaderSpeed; //moves down ladder
+            rigid2D.AddForce(transform.up * JumpForce, ForceMode2D.Impulse); //jump by adding force up on impulse
+            CanJump = false; //resets jump
         }
         if (Input.GetKey(KeyCode.D))
         {
-            RB2.AddForce(transform.right * MovementSpeed); //right movement
+            rigid2D.AddForce(transform.right * MovementSpeed); //moves right                                            
         }
         if (Input.GetKey(KeyCode.A))
         {
-            RB2.AddForce(transform.right * -MovementSpeed); //left movement
+            rigid2D.AddForce(transform.right * -MovementSpeed); //movs left             
         }
-    }
 
+    }
 
     private void ElevatorMovement()
     {
-        Vector3 temp = new Vector3(0, 5f, 0);
+        Vector3 jumpUpVectorY = new Vector3(0, 5f, 0);
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (Input.GetKeyDown(KeyCode.W) && rigid2D.position.y < 14f) //teleports up on elevator
+            {
+                transform.position += jumpUpVectorY;
+            }
+            if (Input.GetKeyDown(KeyCode.S) && rigid2D.position.y > -0f) //teleports down on elevator
+            {
+                transform.position -= jumpUpVectorY;
+            }
+        }
 
-        if (Input.GetKeyDown(KeyCode.E) && RB2.position.y < 14f) //teleports up on elevator
-        {
-            transform.position += temp;
-        }
-        if (Input.GetKeyDown(KeyCode.Q) && RB2.position.y > -0f) //teleports down on elevator
-        {
-            transform.position -= temp;
-        }
     }
+
+    //Audio
+
     private void StepSound()//Activated by animation event, causing sound on steps when walking
     {
         audioS.pitch = UnityEngine.Random.Range(0.75f, 1.15f);//generates random pitch
