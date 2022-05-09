@@ -5,6 +5,7 @@ using UnityEngine;
 public class Elevator_Master : MonoBehaviour
 {
     public GameObject elevatorPanel;
+    public GameObject elevatorShaft;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
