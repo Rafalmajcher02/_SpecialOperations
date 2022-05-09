@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Elevator_Master : MonoBehaviour
+public class Elevator_Single : MonoBehaviour
 {
     public GameObject elevatorPanel;
     public GameObject elevatorShaft;
@@ -18,6 +18,4 @@ public class Elevator_Master : MonoBehaviour
     {
         elevatorPanel.SetActive(false);
     }
-
-
 }
