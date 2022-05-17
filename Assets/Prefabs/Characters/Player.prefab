@@ -552,6 +552,7 @@ MonoBehaviour:
   VIPsCollected: 0
   EnemyKills: 0
   StarsCollected: 0
+  ShootingMode: Safety
 --- !u!114 &7103001739035001170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -565,14 +566,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PS: {fileID: 7103001739035001169}
-  isLadder: 0
-  noLadder: 0
   CanJump: 0
   isElevator: 0
   isPlayingSound: 0
   isPause: 0
+  insideElevator: 0
   triggerName: Ground
-  ladderName: Ladder
   Elevator: Elevator
   walkSteps:
   - {fileID: 8300000, guid: 73ac8aaec7b290e4f9f929d874efa908, type: 3}
@@ -605,7 +604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canShoot: 0
-  safetySwitch: 1
+  safetySwitchBool: 1
   shootsFired: 0
   bulletSpeed: 30
   playerStatistics: {fileID: 7103001739035001169}
@@ -617,6 +616,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5d23044cedcf3c44b9d8cb98f10dff55, type: 3}
   - {fileID: 8300000, guid: 731efcb4c53e3774297c42b82b59407a, type: 3}
   - {fileID: 8300000, guid: db75109aef16a76488ebc41eb462d31a, type: 3}
+  shootingMode: Safety
+  safetyMode: 0
+  shootDeleyBool: 1
+  buttonDown: 0
 --- !u!82 &832779027702915163
 AudioSource:
   m_ObjectHideFlags: 0
@@ -976,7 +979,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &6888048945661960767
 MonoBehaviour:
   m_ObjectHideFlags: 0
