@@ -947,7 +947,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 321028988}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1240208032}
+        m_TargetAssemblyTypeName: Elevator_Shaft, Assembly-CSharp
+        m_MethodName: click2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1240208032}
+        m_TargetAssemblyTypeName: Elevator_Shaft, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &321028988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1917,7 +1941,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 696870108}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1240208032}
+        m_TargetAssemblyTypeName: Elevator_Shaft, Assembly-CSharp
+        m_MethodName: click1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1240208032}
+        m_TargetAssemblyTypeName: Elevator_Shaft, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &696870108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3323,6 +3371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elevatorNumber: 4
   panel: {fileID: 1091375146}
+  player: {fileID: 2014592250}
 --- !u!4 &1241724995 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9092396608086438661, guid: 6b95d7d08e229614b9787b91fda4ae31,
@@ -5449,6 +5498,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4373305176053081653, guid: f6e08284183ce1142a89a19c973cd68c,
     type: 3}
   m_PrefabInstance: {fileID: 4373305176282264134}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2014592250 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7103001739035001168, guid: 00f8f60c355a8784da1c4566723d53d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 7441356522727413767}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2066469088 stripped
 Transform:
