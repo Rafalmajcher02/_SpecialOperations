@@ -12,7 +12,12 @@ public class Elevator_Shaft : MonoBehaviour
 
     [Header("Drags")]
     public GameObject panel;
-    public GameObject player;
+    private GameObject player;
+
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     public virtual void ElevatorButtonAdjuster()
     {
@@ -28,12 +33,8 @@ public class Elevator_Shaft : MonoBehaviour
         Vector2 playerLocation = new Vector2(player.transform.position.x, floorY);
         player.transform.SetPositionAndRotation(playerLocation, player.transform.rotation);
     }
-    public void click1()
+    public void IndexGenerator(int index)
     {
-        floorY = 1 * 5;
-    }
-    public void click2()
-    {
-        floorY = 2 * 5;
+        floorY = index * 5;
     }
 }
