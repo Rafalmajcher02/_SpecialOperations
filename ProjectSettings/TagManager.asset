@@ -15,6 +15,7 @@ TagManager:
   - Elevator
   - Ammo
   - PBullet
+  - Panel
   layers:
   - Default
   - TransparentFX
