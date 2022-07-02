@@ -4,28 +4,40 @@ using UnityEngine;
 
 public class BGMusic : MonoBehaviour
 {
-    public AudioClip[] BgMusic; // array of possible background songs
-    public int trackSelector; //random number variable
-    public int trackHistory; //saves the previous track number to not repeat it
+    //Songs
+    public AudioClip[] BgMusic; //Needs to be filled in in inspector
+
+    //Other
+    private int trackSelector { get; set; } 
+    private int trackHistory { get; set; } 
+    private bool playing { get; set; }
+
+    //Drag
     private AudioSource audioS; 
-    bool playing; 
-    void Start()
+
+
+    private void Awake()
     {
-        trackSelector = Random.Range(0, BgMusic.Length); //chooses an index, random song from array
-        audioS = GetComponent<AudioSource>();
-        audioS.PlayOneShot(BgMusic[trackSelector]); //plays random song
-        trackHistory = trackSelector; //saves the history to avoid repeat
-        playing = audioS.isPlaying; //checks is the song it playing
-    }   
+        audioS = GetComponent<AudioSource>(); //Audio Source
+    }  
     void Update()
     {
-        playing = audioS.isPlaying; //checks if song it playing
-        if (!playing) //if not playing
+        PlaySong();
+    }
+    void PlaySong()
+    {
+        //Check if song is playing
+        playing = audioS.isPlaying; 
+        if (!playing)
         {
-            trackSelector = Random.Range(0, BgMusic.Length); //gets random number
-            if (trackSelector != trackHistory) //if random song is not the same as previous song play it, else random again
+            //Select song
+            trackSelector = Random.Range(0, BgMusic.Length);
+            //Check is song already played
+            if (trackSelector != trackHistory)
             {
+                //Play song
                 audioS.PlayOneShot(BgMusic[trackSelector]);
+                //Update track history
                 trackHistory = trackSelector;
             }
         }
