@@ -8,7 +8,11 @@ public class CharacterGenerator : MonoBehaviour
     public Sprite[] body;
     public Sprite[] allBody;
 
-    private void Awake()
+    void Awake()
+    {
+        GenerateChar();
+    }
+    void GenerateChar()
     {
         //Chose A or B
         int xNom = Random.Range(0, 1);
