@@ -2770,8 +2770,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BgMusic: []
-  trackSelector: 0
-  trackHistory: 0
 --- !u!82 &2082938760
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3554,6 +3552,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2068884264646559947, guid: 784496f027fc2284cac6e8bc6bdedd9d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068884264646559947, guid: 784496f027fc2284cac6e8bc6bdedd9d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.02
+      objectReference: {fileID: 0}
     - target: {fileID: 7804329926708573580, guid: 784496f027fc2284cac6e8bc6bdedd9d,
         type: 3}
       propertyPath: elevatorPanel
