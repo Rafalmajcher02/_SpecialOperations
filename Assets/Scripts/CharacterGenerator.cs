@@ -8,7 +8,7 @@ public class CharacterGenerator : MonoBehaviour
     public Sprite[] body;
     public Sprite[] allBody;
 
-    void Awake()
+    public virtual void Awake()
     {
         GenerateChar();
     }
